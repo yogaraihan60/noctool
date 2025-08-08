@@ -13,10 +13,12 @@ import {
   Trash2
 } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useProcessManager from '../hooks/useProcessManager';
 
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { navigateWithConfirmation } = useProcessManager();
 
   const navItems = [
     { path: '/', icon: Home, label: 'Dashboard' },
@@ -30,7 +32,7 @@ const Sidebar = () => {
   const handleNavClick = (e, path) => {
     e.preventDefault();
     console.log('🧪 [Sidebar] Navigating to:', path);
-    navigate(path);
+    navigateWithConfirmation(path);
   };
 
   return (
@@ -77,7 +79,7 @@ const Sidebar = () => {
           <button
             onClick={() => {
               console.log('🧪 [Sidebar] Test navigation to /ping');
-              navigate('/ping');
+              navigateWithConfirmation('/ping');
             }}
             className="w-full px-3 py-2 bg-blue-600 text-white rounded text-sm hover:bg-blue-700"
           >
@@ -86,7 +88,7 @@ const Sidebar = () => {
           <button
             onClick={() => {
               console.log('🧪 [Sidebar] Test navigation to /traceroute');
-              navigate('/traceroute');
+              navigateWithConfirmation('/traceroute');
             }}
             className="w-full px-3 py-2 bg-green-600 text-white rounded text-sm hover:bg-green-700"
           >
